@@ -26,3 +26,13 @@ spec:
       credentials:
         kafkaUser:
           name: {{ include "amq-streams-console-1.name" . }}-kafka-user
+    - name: {{ .Values.kafka2.name }}
+      namespace: {{ .Values.kafka2.namespace }}
+      listener: tls
+      metricsSource: ocp-prometheus
+      properties:
+        values: []
+        valuesFrom: []
+      credentials:
+        kafkaUser:
+          name: {{ include "amq-streams-console-1.name" . }}-kafka-user
