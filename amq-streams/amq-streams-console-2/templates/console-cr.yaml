@@ -18,10 +18,27 @@ spec:
       clientId: {{ .Values.oidc.clientId }}
       clientSecret:  
         value: {{ .Values.oidc.clientSecret }}
+    roles:
+      - name: developers
+        rules:
+          - privileges:
+              - ALL
+            resourceNames:
+              - kafka-1
+            resources:
+              - kafkas
+      - name: admins
+        rules:
+          - privileges:
+              - ALL
+            resourceNames:
+              - '*'
+            resources:
+              - kafkas
     subjects:
-      - claim: developers
-        include:
-          - developers
+      - include:
+          - user1
+          - user2
         roleNames:
           - developers
       - claim: groups
@@ -29,22 +46,12 @@ spec:
           - admins
         roleNames:
           - admins
-    roles:
-      - name: developers
-        rules:
-          - resources:
-              - kafkas
-            resourceNames:
-              - kafka-1
-            privileges:
-              - ALL
-      # administrators may operate on any (unspecified) Kafka clusters
-      - name: administrators
-        rules:
-          - resources:
-              - kafkas
-            privileges:
-              - ALL
+      - include:
+          - admin1
+          - admin2
+        roleNames:
+          - admins
+
   metricsSources:
     - name: ocp-prometheus
       type: openshift-monitoring
@@ -52,6 +59,37 @@ spec:
     - name: {{ .Values.kafka1.name }}
       namespace: {{ .Values.kafka1.namespace }}
       listener: tls
+      security:
+        roles:
+          - name: admins
+            rules:
+              - privileges:
+                  - ALL
+                resources:
+                  - topics
+                  - topics/records
+                  - consumerGroups
+                  - rebalances
+                  - nodes/configs
+          - name: developers
+            rules:
+              - privileges:
+                  - ALL
+                resources:
+                  - topics
+                  - topics/records
+                  - consumerGroups
+                  - rebalances
+                  - nodes/configs
+              - privileges:
+                  - GET
+                  - LIST
+                resources:
+                  - topics
+                  - topics/records
+                  - consumerGroups
+                  - rebalances
+                  - nodes/configs
       metricsSource: ocp-prometheus
       properties:
         values: []
