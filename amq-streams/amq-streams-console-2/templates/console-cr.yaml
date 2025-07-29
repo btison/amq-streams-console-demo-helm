@@ -74,6 +74,29 @@ spec:
           - name: developers
             rules:
               - privileges:
+                  - GET
+                  - LIST
+                resources:
+                  - topics
+                  - topics/records
+                  - consumerGroups
+                  - rebalances
+                  - nodes/configs
+      metricsSource: ocp-prometheus
+      properties:
+        values: []
+        valuesFrom: []
+      credentials:
+        kafkaUser:
+          name: {{ include "amq-streams-console-2.name" . }}-kafka-user
+    - name: {{ .Values.kafka2.name }}
+      namespace: {{ .Values.kafka2.namespace }}
+      listener: tls
+      security:
+        roles:
+          - name: admins
+            rules:
+              - privileges:
                   - ALL
                 resources:
                   - topics
@@ -81,6 +104,8 @@ spec:
                   - consumerGroups
                   - rebalances
                   - nodes/configs
+          - name: developers
+            rules:
               - privileges:
                   - GET
                   - LIST
