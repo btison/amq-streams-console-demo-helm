@@ -1,0 +1,80 @@
+nameOverride: "kafka"
+
+kafka:
+  enabled: true
+  version: 3.9.0
+  metadataVersion: 3.9-IV0
+  broker:
+    replicas: 3
+  controller:
+    enabled: false
+    replicas: 3
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 200M
+  config:
+    autoCreateTopics: false
+    defaultReplicationFactor: 3
+    offsetsTopicReplicationFactor: 3
+    transactionStateLogReplicationFactor: 3
+    transactionStateLogMinIsr: 2
+    minInsyncReplicas: 2
+    interBrokerProtocolVersion: '3.9'
+  listener:
+    external:
+      enabled: true
+      type: route
+      tls:
+        secret:
+          key:
+            crt: tls.crt
+            key: tls.key
+          value:
+            crt:
+            key: 
+  entityOperator:
+    topicOperator:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 500M
+        requests:
+          cpu: 250m
+          memory: 250M
+    userOperator:
+      resources:
+        limits:
+          cpu: 250m
+          memory: 250M
+        requests:
+          cpu: 150m
+          memory: 150M
+  resources:
+    limits:
+      cpu: '1'
+      memory: 2G
+    requests:
+      cpu: 300m
+      memory: 500M
+
+bootstrapServer: 
+
+namespace:
+
+authentication:
+  clientId: parasol
+  clientSecret: parasol
+  securityProtocol: SASL_PLAINTEXT
+  saslMechanism: SCRAM-SHA-512
+
+authorization: simple
+
+argocd:
+  syncwave:
+    enabled: true
+    kafka: "0"
+    namespace: "-1"
