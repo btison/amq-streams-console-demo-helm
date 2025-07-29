@@ -17,6 +17,9 @@ dependencies:
   - name: amq-streams-console-1
     version: 0.1.0
     repository: file://amq-streams-console-1
+  - name: amq-streams-console-2
+    version: 0.1.0
+    repository: file://amq-streams-console-2
   - name: kafka-topics-1
     version: 0.1.0
     repository: file://kafka-topics-1

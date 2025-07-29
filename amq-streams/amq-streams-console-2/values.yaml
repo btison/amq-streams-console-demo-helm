@@ -1,0 +1,24 @@
+nameOverride: streams-console-2
+
+namespace: 
+subdomain:
+
+kafka1:
+  name: kafka
+  namespace: kafka
+  authentication:
+    saslMechanism: SCRAM-SHA-512
+    securityProtocol: SASL_PLAINTEXT
+  authorization: simple
+
+oidc:
+  authServerUrl:
+  clientId:
+  clientSecret:
+
+
+argocd:
+  syncwave:
+    enabled: true
+    console: "1"
+    namespace: "0"
