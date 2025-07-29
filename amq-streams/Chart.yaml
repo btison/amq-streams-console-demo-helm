@@ -14,3 +14,9 @@ dependencies:
   - name: kafka-broker-1
     version: 0.1.0
     repository: file://kafka-broker-1
+  - name: amq-streams-console-1
+    version: 0.1.0
+    repository: file://amq-streams-console-1
+  # - name: kafka-topics
+  #   version: 0.1.0
+  #   repository: file://kafka-topics
