@@ -9,9 +9,9 @@ metadata:
   {{- end }}
   labels:
     strimzi.io/cluster: {{ $.Values.kafka.cluster }}
-    {{- include "kafka-topics-1.labels" $ | nindent 4 }}
+    {{- include "kafka-topics-2.labels" $ | nindent 4 }}
   annotations:
-    {{- include "kafka-topics-1.argocd-syncwave" $ | nindent 4 }}
+    {{- include "kafka-topics-2.argocd-syncwave" $ | nindent 4 }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   partitions: {{ .partitions }}
