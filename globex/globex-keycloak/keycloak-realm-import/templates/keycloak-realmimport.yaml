@@ -424,29 +424,6 @@ spec:
             - manage-account
         notBefore: 0
         groups: []
-      - username: {{ $loop }}
-        email: {{ $loop }}@email.com
-        enabled: true
-        totp: false
-        emailVerified: false
-        firstName: ''
-        lastName: ''
-        credentials:
-          - type: password
-            userLabel: My password
-            secretData: '{"value":"80d4Uk0YFiEgjhzKlTCPpWIj1ZwPJhLbdOmtT6jrbGk=","salt":"I/MiuExkIwpPxqm41IaSEQ==","additionalParameters":{}}'
-            credentialData: '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}'
-        disableableCredentialTypes: []
-        requiredActions: []
-        realmRoles:
-          - default-roles-globex
-        clientRoles:
-          realm-management:
-            - realm-admin
-            - manage-realm
-            - manage-clients
-        notBefore: 0
-        groups: []
       - username: asilva
         enabled: true
         totp: false
