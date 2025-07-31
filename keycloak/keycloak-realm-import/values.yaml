@@ -25,11 +25,11 @@ hook:
 
 users:
   users:
-    - id: user1      
+    - id: dev1      
       groups:
         - developers
         - devteam1
-    - id: user2
+    - id: dev2
       groups:
         - developers
         - devteam1
