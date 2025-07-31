@@ -92,6 +92,15 @@ spec:
           clientRole: false
           containerId: {{ $.Values.realm.name }}
           attributes: {}
+{{- range $item := .Values.roles }}
+        - id: {{ uuidv4 }}
+          name: {{ $item.name }}
+          description: ''
+          composite: false
+          clientRole: false
+          containerId: {{ $.Values.realm.name }}
+          attributes: {}
+{{- end }}          
       client:
         realm-management:
           - id: {{ uuidv4 }}
@@ -339,7 +348,8 @@ spec:
         path: "/{{ $item.name }}"
         subGroups: []
         attributes: {}
-        realmRoles: []
+        realmRoles:
+          {{- toYaml $item.roles | nindent 10 }}
         clientRoles: {}
 {{- end }}
     defaultRole:

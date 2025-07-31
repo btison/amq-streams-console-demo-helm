@@ -38,13 +38,23 @@ users:
         - admins
     - id: admin2
       groups:
-        - admins
+        - administrators
   password:
 
 groups:
   - name: developers
+    roles: 
+      - developers
   - name: devteam1
-  - name: admins
+    roles:
+      - developers
+  - name: administrators
+    roles:
+      - administrators
+
+roles:
+  - name: developers
+  - name: administrators
 
 client:
   amqstreams:
