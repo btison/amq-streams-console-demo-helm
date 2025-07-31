@@ -35,7 +35,7 @@ users:
         - devteam1
     - id: admin1
       groups:
-        - admins
+        - administrators
     - id: admin2
       groups:
         - administrators

@@ -36,19 +36,14 @@ spec:
             resources:
               - kafkas
     subjects:
-      - include:
-          - user1
-          - user2
+      - claim: groups
+        include:
+          - developers
         roleNames:
           - developers
       - claim: groups
         include:
-          - admins
-        roleNames:
-          - admins
-      - include:
-          - admin1
-          - admin2
+          - administrators
         roleNames:
           - admins
 
