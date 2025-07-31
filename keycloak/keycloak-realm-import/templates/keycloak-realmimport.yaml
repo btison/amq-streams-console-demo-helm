@@ -611,6 +611,7 @@ spec:
         defaultClientScopes:
           - profile
           - roles
+          - groups
           - email
         optionalClientScopes:
           - web-origins
@@ -746,6 +747,29 @@ spec:
           - offline_access
           - microprofile-jwt
     clientScopes:
+      - id: {{ uuidv4 }}
+        name: groups
+        description: ''
+        protocol: openid-connect
+        attributes:
+          include.in.token.scope: 'true'
+          display.on.consent.screen: 'true'
+          gui.order: ''
+          consent.screen.text: ''
+        protocolMappers:
+        - id: {{ uuidv4 }}
+          name: groups
+          protocol: openid-connect
+          protocolMapper: oidc-usermodel-realm-role-mapper
+          consentRequired: false
+          config:
+            introspection.token.claim: 'true'
+            multivalued: 'true'
+            user.attribute: foo
+            id.token.claim: 'true'
+            access.token.claim: 'true'
+            claim.name: groups
+            jsonType.label: String
       - id: {{ uuidv4 }}
         name: web-origins
         description: OpenID Connect scope for add allowed web origins to the access token
@@ -1175,6 +1199,7 @@ spec:
       - address
       - phone
       - microprofile-jwt
+      - groups
     browserSecurityHeaders:
       contentSecurityPolicyReportOnly: ''
       xContentTypeOptions: nosniff
@@ -1794,7 +1819,7 @@ spec:
       parRequestUriLifespan: '60'
       cibaInterval: '5'
       realmReusableOtpCode: 'false'
-    keycloakVersion: 24.0.8.redhat-00004
+    keycloakVersion: 24.0.11.redhat-00001
     userManagedAccessAllowed: false
     clientProfiles:
       profiles: []
