@@ -2,7 +2,7 @@ keycloak:
   name: keycloak
 
 realm:
-  name: amqstreams
+  name: amqstreams-console
 
 hook:
   image:
