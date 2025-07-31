@@ -14,18 +14,24 @@ dependencies:
   - name: kafka-broker-1
     version: 0.1.0
     repository: file://kafka-broker-1
+    condition: kafka1.enabled
   - name: kafka-broker-2
     version: 0.1.0
     repository: file://kafka-broker-2
+    condition: kafka2.enabled
   - name: amq-streams-console-1
     version: 0.1.0
     repository: file://amq-streams-console-1
+    condition: console1.enabled
   - name: amq-streams-console-2
     version: 0.1.0
     repository: file://amq-streams-console-2
+    condition: console2.enabled
   - name: kafka-topics-1
     version: 0.1.0
     repository: file://kafka-topics-1
+    condition: kafka2.enabled
   - name: kafka-topics-2
     version: 0.1.0
     repository: file://kafka-topics-2
+    condition: kafka2.enabled

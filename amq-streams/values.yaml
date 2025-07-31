@@ -1,0 +1,11 @@
+kafka1:
+  enabled: true
+
+kafka2:
+  enabled: true
+
+console1:
+  enabled: true
+
+console2:
+  enabled: true
