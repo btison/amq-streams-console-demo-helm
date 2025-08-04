@@ -26,6 +26,7 @@ spec:
     acls:
       - operations:
           - Describe
+          - DescribeConfigs
         resource:
           type: cluster
       - operations:
@@ -33,12 +34,15 @@ spec:
           - Describe
           - Read
           - Write
+          - Delete
         resource:
           name: '*'
           patternType: literal
           type: topic
       - operations:
           - Read
+          - Describe
+          - Delete
         resource:
           name: '*'
           patternType: literal
