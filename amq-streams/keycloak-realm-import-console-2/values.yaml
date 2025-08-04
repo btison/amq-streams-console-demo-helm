@@ -1,3 +1,5 @@
+namespace:
+
 keycloak:
   name: keycloak
 

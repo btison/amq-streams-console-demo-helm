@@ -2,6 +2,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ include "keycloak-realmimport.name" . }}-hook
+  {{- if .Values.namespace }}
+  namespace: {{ .Values.namespace }}
+  {{- end }}
   labels:
     {{- include "keycloak-realmimport.labels" . | nindent 4 }}
   annotations:
