@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: {{ .Values.namespace }}
   annotations:
-    {{- include "amq-streams-console-1-namespace.argocd-syncwave" . | nindent 4 }}
+    {{- include "amq-streams-console-oauth-namespace.argocd-syncwave" . | nindent 4 }}
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
 {{- end }}

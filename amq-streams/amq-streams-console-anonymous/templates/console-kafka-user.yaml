@@ -1,22 +1,22 @@
-{{- if eq .Values.kafka2.authentication.saslMechanism "SCRAM-SHA-512" -}}
+{{- if eq .Values.kafka1.authentication.saslMechanism "SCRAM-SHA-512" -}}
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: {{ include "amq-streams-console-2.name" . }}-kafka-user
+  name: {{ include "amq-streams-console-anonymous.name" . }}-kafka-user
   {{- if .Values.namespace }}
-  namespace: {{ .Values.kafka2.namespace }}
+  namespace: {{ .Values.kafka1.namespace }}
   {{- end }}
   labels:
-    {{- include "amq-streams-console-2.labels" . | nindent 4 }}
-    strimzi.io/cluster: {{ .Values.kafka2.name }}
+    {{- include "amq-streams-console-anonymous.labels" . | nindent 4 }}
+    strimzi.io/cluster: {{ .Values.kafka1.name }}
   annotations:
-    {{- include "amq-streams-console-2.argocd-syncwave" . | nindent 4 }}
+    {{- include "amq-streams-console-anonymous.argocd-syncwave" . | nindent 4 }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   authentication:
     type: scram-sha-512
-  {{- if eq .Values.kafka2.authorization "simple" }}
+  {{- if eq .Values.kafka1.authorization "simple" }}
   authorization:
     type: simple  
     acls:

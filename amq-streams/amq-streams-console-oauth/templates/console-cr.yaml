@@ -1,17 +1,17 @@
 apiVersion: console.streamshub.github.com/v1alpha1
 kind: Console
 metadata:
-  name: {{ include "amq-streams-console-2.name" . }}
+  name: {{ include "amq-streams-console-oauth.name" . }}
   {{- if .Values.namespace }}
   namespace: {{ .Values.namespace }}
   {{- end }}
   labels:
-    {{- include "amq-streams-console-2.labels" . | nindent 4 }}
+    {{- include "amq-streams-console-oauth.labels" . | nindent 4 }}
   annotations:
-    {{- include "amq-streams-console-2.argocd-syncwave" . | nindent 4 }}
+    {{- include "amq-streams-console-oauth.argocd-syncwave" . | nindent 4 }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  hostname: {{ include "amq-streams-console-2.name" . }}.{{ .Values.subdomain }}
+  hostname: {{ include "amq-streams-console-oauth.name" . }}.{{ .Values.subdomain }}
   security:
     oidc:
       authServerUrl: {{ .Values.oidc.authServerUrl }}
@@ -83,7 +83,7 @@ spec:
         valuesFrom: []
       credentials:
         kafkaUser:
-          name: {{ include "amq-streams-console-2.name" . }}-kafka-user
+          name: {{ include "amq-streams-console-oauth.name" . }}-kafka-user
     - name: {{ .Values.kafka2.name }}
       namespace: {{ .Values.kafka2.namespace }}
       listener: tls
@@ -116,4 +116,4 @@ spec:
         valuesFrom: []
       credentials:
         kafkaUser:
-          name: {{ include "amq-streams-console-2.name" . }}-kafka-user
+          name: {{ include "amq-streams-console-oauth.name" . }}-kafka-user

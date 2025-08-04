@@ -19,14 +19,14 @@ dependencies:
     version: 0.1.0
     repository: file://kafka-broker-2
     condition: kafka2.enabled
-  - name: amq-streams-console-1
+  - name: amq-streams-console-anonymous
     version: 0.1.0
-    repository: file://amq-streams-console-1
-    condition: console1.enabled
-  - name: amq-streams-console-2
+    repository: file://amq-streams-console-anonymous
+    condition: console.anonymous.enabled
+  - name: amq-streams-console-oauth
     version: 0.1.0
-    repository: file://amq-streams-console-2
-    condition: console2.enabled
+    repository: file://amq-streams-console-oauth
+    condition: console.oauth.enabled
   - name: kafka-topics-1
     version: 0.1.0
     repository: file://kafka-topics-1
@@ -35,7 +35,7 @@ dependencies:
     version: 0.1.0
     repository: file://kafka-topics-2
     condition: kafka2.enabled
-  - name: keycloak-realm-import-console-2
+  - name: keycloak-realm-import-console-oauth
     version: 0.1.0
-    repository: file://keycloak-realm-import-console-2
-    condition: console2.enabled    
+    repository: file://keycloak-realm-import-console-oauth
+    condition: console.oauth.enabled

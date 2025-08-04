@@ -1,15 +1,15 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "keycloak-realmimport.name" . }}-hook
+  name: {{ include "keycloak-realmimport-console-oauth.name" . }}-hook
   {{- if .Values.namespace }}
   namespace: {{ .Values.namespace }}
   {{- end }}
   labels:
-    {{- include "keycloak-realmimport.labels" . | nindent 4 }}
+    {{- include "keycloak-realmimport-console-oauth.labels" . | nindent 4 }}
   annotations: 
     {{- if .Values.argocd.enabled }}
-    {{- include "keycloak-realmimport.argocd-syncwave" . | nindent 4 }}
+    {{- include "keycloak-realmimport-console-oauth.argocd-syncwave" . | nindent 4 }}
     {{- else }}
     "helm.sh/hook": pre-install  
     {{- end }}    
@@ -17,9 +17,9 @@ spec:
   selector: {}
   template:
     metadata:
-      name: {{ include "keycloak-realmimport.name" . }}-hook
+      name: {{ include "keycloak-realmimport-console-oauth.name" . }}-hook
     spec:
-      serviceAccountName: {{ include "keycloak-realmimport.name" . }}-hook
+      serviceAccountName: {{ include "keycloak-realmimport-console-oauth.name" . }}-hook
       securityContext:
         {{- toYaml .Values.hook.podSecurityContext | nindent 8 }}
       containers:

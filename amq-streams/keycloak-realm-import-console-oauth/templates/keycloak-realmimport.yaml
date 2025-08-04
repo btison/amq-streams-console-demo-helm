@@ -11,7 +11,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   {{- end }}
   labels:
-    {{- include "keycloak-realmimport.labels" $ | nindent 4 }}
+    {{- include "keycloak-realmimport-console-oauth.labels" $ | nindent 4 }}
     app: keycloak
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
@@ -559,7 +559,7 @@ spec:
         enabled: true
         alwaysDisplayInConsole: false
         clientAuthenticatorType: client-secret
-        secret: {{ include "keycloak-realmimport.client-amqstreams-secret" . }}
+        secret: {{ include "keycloak-realmimport-console-oauth.client-amqstreams-secret" . }}
         redirectUris:
           - "*"
         webOrigins:

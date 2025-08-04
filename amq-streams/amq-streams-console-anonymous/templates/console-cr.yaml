@@ -1,17 +1,17 @@
 apiVersion: console.streamshub.github.com/v1alpha1
 kind: Console
 metadata:
-  name: {{ include "amq-streams-console-1.name" . }}
+  name: {{ include "amq-streams-console-anonymous.name" . }}
   {{- if .Values.namespace }}
   namespace: {{ .Values.namespace }}
   {{- end }}
   labels:
-    {{- include "amq-streams-console-1.labels" . | nindent 4 }}
+    {{- include "amq-streams-console-anonymous.labels" . | nindent 4 }}
   annotations:
-    {{- include "amq-streams-console-1.argocd-syncwave" . | nindent 4 }}
+    {{- include "amq-streams-console-anonymous.argocd-syncwave" . | nindent 4 }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  hostname: {{ include "amq-streams-console-1.name" . }}.{{ .Values.subdomain }}
+  hostname: {{ include "amq-streams-console-anonymous.name" . }}.{{ .Values.subdomain }}
   metricsSources:
     - name: ocp-prometheus
       type: openshift-monitoring
@@ -25,7 +25,7 @@ spec:
         valuesFrom: []
       credentials:
         kafkaUser:
-          name: {{ include "amq-streams-console-1.name" . }}-kafka-user
+          name: {{ include "amq-streams-console-anonymous.name" . }}-kafka-user
     - name: {{ .Values.kafka2.name }}
       namespace: {{ .Values.kafka2.namespace }}
       listener: tls
@@ -35,4 +35,4 @@ spec:
         valuesFrom: []
       credentials:
         kafkaUser:
-          name: {{ include "amq-streams-console-1.name" . }}-kafka-user
+          name: {{ include "amq-streams-console-anonymous.name" . }}-kafka-user

@@ -3,15 +3,15 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: {{ include "amq-streams-console-1.name" . }}-kafka-user
+  name: {{ include "amq-streams-console-oauth.name" . }}-kafka-user
   {{- if .Values.namespace }}
   namespace: {{ .Values.kafka1.namespace }}
   {{- end }}
   labels:
-    {{- include "amq-streams-console-1.labels" . | nindent 4 }}
+    {{- include "amq-streams-console-oauth.labels" . | nindent 4 }}
     strimzi.io/cluster: {{ .Values.kafka1.name }}
   annotations:
-    {{- include "amq-streams-console-1.argocd-syncwave" . | nindent 4 }}
+    {{- include "amq-streams-console-oauth.argocd-syncwave" . | nindent 4 }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   authentication:

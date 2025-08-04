@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "keycloak-realmimport.name" -}}
+{{- define "amq-streams-console-anonymous.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "keycloak-realmimport.fullname" -}}
+{{- define "amq-streams-console-anonymous.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "keycloak-realmimport.chart" -}}
+{{- define "amq-streams-console-anonymous.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "keycloak-realmimport.labels" -}}
-helm.sh/chart: {{ include "keycloak-realmimport.chart" . }}
-{{ include "keycloak-realmimport.selectorLabels" . }}
+{{- define "amq-streams-console-anonymous.labels" -}}
+helm.sh/chart: {{ include "amq-streams-console-anonymous.chart" . }}
+{{ include "amq-streams-console-anonymous.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "keycloak-realmimport.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "keycloak-realmimport.name" . }}
+{{- define "amq-streams-console-anonymous.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "amq-streams-console-anonymous.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "keycloak-realmimport.serviceAccountName" -}}
+{{- define "amq-streams-console-anonymous.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "keycloak-realmimport.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "amq-streams-console-anonymous.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -64,10 +64,10 @@ Create the name of the service account to use
 {{/*
 ArgoCD Syncwave
 */}}
-{{- define "keycloak-realmimport.argocd-syncwave" -}}
-{{- if .Values.argocd }}
-{{- if and (.Values.argocd.syncwave) (.Values.argocd.enabled) -}}
-argocd.argoproj.io/sync-wave: "{{ .Values.argocd.syncwave }}"
+{{- define "amq-streams-console-anonymous.argocd-syncwave" -}}
+{{- if and (.Values.argocd) (.Values.argocd.syncwave) }}
+{{- if (.Values.argocd.syncwave.enabled) -}}
+argocd.argoproj.io/sync-wave: "{{ .Values.argocd.syncwave.console }}"
 {{- else }}
 {{- "{}" }}
 {{- end }}
@@ -77,23 +77,16 @@ argocd.argoproj.io/sync-wave: "{{ .Values.argocd.syncwave }}"
 {{- end }}
 
 {{/*
-Amqstreams client secret
+ArgoCD Syncwave
 */}}
-{{- define "keycloak-realmimport.client-amqstreams-secret" -}}
-{{- if .Values.client.amqstreams.secret }}
-{{- .Values.client.amqstreams.secret }}
+{{- define "amq-streams-console-anonymous-namespace.argocd-syncwave" -}}
+{{- if and (.Values.argocd) (.Values.argocd.syncwave) }}
+{{- if (.Values.argocd.syncwave.enabled) -}}
+argocd.argoproj.io/sync-wave: "{{ .Values.argocd.syncwave.namespace }}"
 {{- else }}
-{{- randAlphaNum 32 }}
+{{- "{}" }}
 {{- end }}
-{{- end }}
-
-{{/*
-User password
-*/}}
-{{- define "keycloak.user.password" -}}
-{{- if .Values.users.password }}
-{{- .Values.users.password }}
 {{- else }}
-{{- randAlpha 8 }}
+{{- "{}" }}
 {{- end }}
 {{- end }}
