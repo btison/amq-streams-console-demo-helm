@@ -2,7 +2,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: {{ .Values.authentication.clientId }}
+  name: {{ .Values.authentication.client.clientId }}
   {{- if .Values.namespace }}
   namespace: {{ .Values.namespace }}
   {{- end }}
@@ -13,13 +13,6 @@ metadata:
     {{- include "kafka-broker-2.argocd-syncwave" . | nindent 4 }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  authentication:
-    type: scram-sha-512
-    password:
-      valueFrom:
-        secretKeyRef:
-          name: {{ .Values.authentication.clientId }}-user-secret
-          key: clientSecret
   {{- if eq .Values.authorization "simple" }}
   authorization:
     type: simple

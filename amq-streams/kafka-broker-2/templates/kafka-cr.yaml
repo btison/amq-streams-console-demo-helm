@@ -26,26 +26,29 @@ spec:
       port: 9092
       type: internal
       tls: false
-      {{- include "kafka-broker-2.authentication" . | nindent 6 }}
+      authentication:
+        {{- toYaml .Values.authentication.server | nindent 8 }}
     - name: tls
       port: 9093
       type: internal
       tls: true
-      {{- include "kafka-broker-2.authentication" . | nindent 6 }}
+      authentication:
+        {{- toYaml .Values.authentication.server | nindent 8 }}
     {{- if .Values.kafka.listener.external.enabled }}
     - name: ext
       port: 9094
       type: {{ .Values.kafka.listener.external.type }}
       tls: true
-      {{- include "kafka-broker-2.authentication" . | nindent 6 }}
+      authentication:
+        {{- toYaml .Values.authentication.server | nindent 8 }}
       configuration:
         brokerCertChainAndKey:
           secretName: {{ include "kafka-broker-2.name" . }}-tls-secret
           certificate: {{ .Values.kafka.listener.external.tls.secret.key.crt }}
-          key: {{ .Values.kafka.listener.external.tls.secret.key.key }}     
+          key: {{ .Values.kafka.listener.external.tls.secret.key.key }}
     {{- end }}
     config:
-      allow.everyone.if.no.acl.found: 'true'
+      allow.everyone.if.no.acl.found: 'false'
       auto.create.topics.enable: {{ .Values.kafka.config.autoCreateTopics }}
       offsets.topic.replication.factor: {{ .Values.kafka.config.offsetsTopicReplicationFactor }}
       transaction.state.log.min.isr: {{ .Values.kafka.config.transactionStateLogMinIsr }}

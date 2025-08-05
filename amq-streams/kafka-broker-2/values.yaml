@@ -66,10 +66,19 @@ bootstrapServer:
 namespace:
 
 authentication:
-  clientId: parasol
-  clientSecret: parasol
-  securityProtocol: SASL_PLAINTEXT
-  saslMechanism: SCRAM-SHA-512
+  client:
+    clientId: 
+    clientSecret: 
+    securityProtocol: SASL_SSL
+    saslMechanism: OAUTHBEARER
+    tokenEndpointUri: 
+  server:
+    type: oauth
+    validIssuerUri: 
+    jwksEndpointUri: 
+    userNameClaim: preferred_username
+    maxSecondsWithoutReauthentication:
+    enablePlain:
 
 authorization: simple
 
