@@ -14,8 +14,11 @@ kafka2:
   name: kafka
   namespace: kafka
   authentication:
-    saslMechanism: SCRAM-SHA-512
+    saslMechanism: OAUTHBEARER
     securityProtocol: SASL_PLAINTEXT
+    clientId:
+    clientSecret:
+    tokenEndpointUri:
   authorization: simple
 
 oidc:

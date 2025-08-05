@@ -112,8 +112,8 @@ spec:
                   - nodes/configs
       metricsSource: ocp-prometheus
       properties:
-        values: []
-        valuesFrom: []
-      credentials:
-        kafkaUser:
-          name: {{ include "amq-streams-console-oauth.name" . }}-kafka-user
+        values:
+          - name: sasl.jaas.config
+            value: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required oauth.client.id="{{ .Values.kafka2.authentication.clientId }}" oauth.client.secret="{{ .Values.kafka2.authentication.clientSecret }}" oauth.token.endpoint.uri="{{ .Values.kafka2.authentication.tokenEndpointUri }}" ;
+          - name: sasl.login.callback.handler.class
+            value: io.strimzi.kafka.oauth.client.JaasClientOauthLoginCallbackHandler
