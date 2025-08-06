@@ -39,3 +39,7 @@ dependencies:
     version: 0.1.0
     repository: file://keycloak-realm-import-console-oauth
     condition: console.oauth.enabled
+  - name: keycloak-realm-import-amqstreams
+    version: 0.1.0
+    repository: file://keycloak-realm-import-amqstreams
+    condition: kafka2.enabled

@@ -1,0 +1,44 @@
+namespace:
+
+keycloak:
+  name: keycloak
+
+realm:
+  name: amqstreams
+
+hook:
+  image:
+    repository: quay.io/cloud-architecture-workshop/wait-for-statefulset-job
+    pullPolicy: IfNotPresent
+    tag: "1c68180"
+  serviceAccount:
+    create: true
+    name: ""
+  podSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+  maxTimeToWait: 120000
+
+client:
+  amqstreams:
+    name:
+    secret:
+
+users:
+  users: []
+  password:
+
+groups: []
+
+roles: []
+
+argocd:
+  enabled: true
+  syncwave: "-2"
+
