@@ -1,4 +1,3 @@
-{{- $globexWebGatewayContainerId := printf "%s" (uuidv4 | toString) }}
 {{- $clientRealmManagementContainerId := printf "%s" (uuidv4 | toString) }}
 {{- $clientBrokerContainerId := printf "%s" (uuidv4 | toString) }}
 {{- $accountContainerId := printf "%s" (uuidv4 | toString) }}
