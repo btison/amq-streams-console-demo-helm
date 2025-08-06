@@ -4,7 +4,7 @@ fullnameOverride: ""
 namespace: openshift-operators
 
 subscription:
-  channel: amq-streams-2.9.x
+  channel: amq-streams-3.0.x
   installPlanApproval: Automatic
   name: amq-streams-console
   source: redhat-operators
