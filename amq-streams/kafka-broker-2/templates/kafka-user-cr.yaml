@@ -1,4 +1,3 @@
-{{- if eq .Values.authentication.saslMechanism "SCRAM-SHA-512" -}}
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
@@ -48,4 +47,3 @@ spec:
           patternType: literal
           type: transactionalId
   {{- end }}
-{{- end }}
