@@ -2,8 +2,8 @@ nameOverride: "kafka"
 
 kafka:
   enabled: true
-  version: 3.9.0
-  metadataVersion: 3.9-IV0
+  version: 4.0.0
+  metadataVersion: 4.0-IV3
   broker:
     replicas: 3
   controller:
@@ -23,7 +23,6 @@ kafka:
     transactionStateLogReplicationFactor: 3
     transactionStateLogMinIsr: 2
     minInsyncReplicas: 2
-    interBrokerProtocolVersion: '3.9'
   listener:
     external:
       enabled: true
