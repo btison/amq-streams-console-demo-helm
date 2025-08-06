@@ -24,7 +24,7 @@ spec:
           - privileges:
               - ALL
             resourceNames:
-              - kafka-1
+              - kafka-scram
             resources:
               - kafkas
       - name: admins
