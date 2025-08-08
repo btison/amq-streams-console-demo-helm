@@ -68,6 +68,9 @@ securityContext:
     drop:
       - ALL
 
+logLevel:
+  org.globex.kafka: INFO
+
 datagen:
   resetAtStartup: true
   consumerGroupPrefix: datagen-group-
