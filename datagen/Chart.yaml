@@ -1,0 +1,11 @@
+apiVersion: v2
+name: datagen
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: datagen-producer
+    version: 0.1.0
+    repository: file://datagen-producer
+    condition: producer.enabled
