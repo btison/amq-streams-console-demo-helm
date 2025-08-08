@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: quay.io/btison/kafka-datagen-producer
   pullPolicy: IfNotPresent
-  tag: 66d7b54
+  tag: f655909
 
 nameOverride: ""
 fullnameOverride: ""
