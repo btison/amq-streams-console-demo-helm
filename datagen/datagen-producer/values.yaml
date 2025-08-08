@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: quay.io/btison/kafka-datagen-producer
   pullPolicy: IfNotPresent
-  tag: f655909
+  tag: eaa1414
 
 nameOverride: ""
 fullnameOverride: ""
@@ -78,4 +78,5 @@ datagen:
   partitionsPerTopic: 5
   topicsPerConsumer: 1
   consumerGroups: 1
+  topicNameTemplate: datagen_%03d-%s
   kafka:
