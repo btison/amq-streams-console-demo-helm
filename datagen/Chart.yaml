@@ -9,3 +9,7 @@ dependencies:
     version: 0.1.0
     repository: file://datagen-producer
     condition: producer.enabled
+  - name: datagen-consumer
+    version: 0.1.0
+    repository: file://datagen-consumer
+    condition: consumer.enabled

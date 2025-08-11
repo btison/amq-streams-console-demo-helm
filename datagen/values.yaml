@@ -1,2 +1,4 @@
 producer:
   enabled: true
+consumer:
+  enabled: true

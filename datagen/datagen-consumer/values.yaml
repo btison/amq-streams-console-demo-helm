@@ -1,0 +1,77 @@
+replicaCount: 1
+
+image:
+  repository: quay.io/btison/kafka-datagen-consumer
+  pullPolicy: IfNotPresent
+  tag: e140e80
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  containerPort: 8080
+  portName: http
+
+route:
+  enabled: true
+  host:
+  tlsEnabled: true
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /q/health/live
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+readinessProbe:
+  httpGet:
+    path: /q/health/ready
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+podSecurityContext: 
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+datagen:
+  consumerGroupPrefix: datagen-group-
+  partitionsPerTopic: 5
+  topicsPerConsumer: 1
+  consumerGroups: 1
+  topicNameTemplate: datagen_%03d-%s
+  kafka:
