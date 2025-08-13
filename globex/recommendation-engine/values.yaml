@@ -8,7 +8,7 @@ image:
   repository: quay.io/cloud-architecture-workshop/recommendation-engine
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: 6238ec6
 
 nameOverride: ""
 fullnameOverride: ""
